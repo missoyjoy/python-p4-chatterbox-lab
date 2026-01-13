@@ -10,5 +10,10 @@ db = SQLAlchemy(metadata=metadata)
 
 class Message(db.Model, SerializerMixin):
     __tablename__ = 'messages'
+    
+    body = db.Column(db.String(140), nullable=False)
+    username = db.Column(db.String(20), nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now(), nullable=False)
+    updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now(), nullable=False)
 
     id = db.Column(db.Integer, primary_key=True)
